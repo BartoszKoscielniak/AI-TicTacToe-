@@ -40,5 +40,10 @@
             <Font name="Garamond Bold" size="21.0" />
          </font>
       </Label>
+      <Label fx:id="endingText" alignment="CENTER" layoutX="600.0" layoutY="218.0" prefHeight="118.0" prefWidth="200.0" text="You lost!" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Garamond Bold" size="45.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
