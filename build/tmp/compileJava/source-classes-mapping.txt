@@ -2,9 +2,3 @@ Main.java
  Main
 GameBoardController.java
  GameBoardController
- GameBoardController$1
- GameBoardController$2
- GameBoardController$3
- GameBoardController$4
- GameBoardController$5
- GameBoardController$6
