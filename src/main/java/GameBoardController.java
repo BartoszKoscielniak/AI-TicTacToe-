@@ -16,6 +16,7 @@ public class GameBoardController implements Initializable {
     Integer[][] xPos = new Integer[3][3];
     Integer[][] xPosTemp = new Integer[3][3];
     int diffLVL;
+    boolean gameStarted = false;
 
     @FXML
     private GridPane ticTacToeBoard;
@@ -35,6 +36,9 @@ public class GameBoardController implements Initializable {
     @FXML
     private Button startPlayerButton;
 
+    @FXML
+    private Button restartButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //wyzerowanie tablic
@@ -45,7 +49,9 @@ public class GameBoardController implements Initializable {
             Arrays.fill(xPo, 0);
         }
         endingText.setVisible(false);
+        restartButton.setDisable(true);
         radioButtonEasy.setSelected(true);
+        diffLVL = 1;
 
         radioButtonEasy.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -67,7 +73,7 @@ public class GameBoardController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 Label x = new Label("X");
-                if (xPos[(int) Math.ceil(event.getSceneX() / 200) - 1][(int) Math.ceil(event.getSceneY() / 200) - 1] != 1 && xPos[(int) Math.ceil(event.getSceneX() / 200) - 1][(int) Math.ceil(event.getSceneY() / 200) - 1] != -1 && !endingText.isVisible()) {
+                if (xPos[(int) Math.ceil(event.getSceneX() / 200) - 1][(int) Math.ceil(event.getSceneY() / 200) - 1] != 1 && xPos[(int) Math.ceil(event.getSceneX() / 200) - 1][(int) Math.ceil(event.getSceneY() / 200) - 1] != -1 && !endingText.isVisible() && gameStarted) {
                     ticTacToeBoard.add(x, (int) Math.ceil(event.getSceneX() / 200) - 1, (int) Math.ceil(event.getSceneY() / 200) - 1);
                     xPos[(int) Math.ceil(event.getSceneX() / 200) - 1][(int) Math.ceil(event.getSceneY() / 200) - 1] = 1;
                     xPosTemp[(int) Math.ceil(event.getSceneX() / 200) - 1][(int) Math.ceil(event.getSceneY() / 200) - 1] = 1;
@@ -85,6 +91,11 @@ public class GameBoardController implements Initializable {
                 aiMove(diffLVL);
                 radioButtonHard.setDisable(true);
                 radioButtonEasy.setDisable(true);
+                gameStarted = true;
+                startButton.setDisable(true);
+                startPlayerButton.setDisable(true);
+                restartButton.setDisable(false);
+                ticTacToeBoard.setGridLinesVisible(true);
             }
         });
 
@@ -93,6 +104,37 @@ public class GameBoardController implements Initializable {
             public void handle(MouseEvent event) {
                 radioButtonHard.setDisable(true);
                 radioButtonEasy.setDisable(true);
+                gameStarted = true;
+                startButton.setDisable(true);
+                startPlayerButton.setDisable(true);
+                restartButton.setDisable(false);
+                ticTacToeBoard.setGridLinesVisible(true);
+            }
+        });
+
+        restartButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                for (Integer[] xPo : xPos) {
+                    Arrays.fill(xPo, 0);
+                }
+                for (Integer[] xPo : xPosTemp) {
+                    Arrays.fill(xPo, 0);
+                }
+                ticTacToeBoard.setGridLinesVisible(false);
+                ticTacToeBoard.getChildren().clear();
+                ticTacToeBoard.setGridLinesVisible(true);
+                startButton.setDisable(false);
+                startPlayerButton.setDisable(false);
+                restartButton.setDisable(true);
+                radioButtonEasy.setSelected(true);
+                diffLVL = 1;
+                gameStarted = false;
+                endingText.setVisible(false);
+                radioButtonEasy.setDisable(false);
+                radioButtonHard.setDisable(false);
+                radioButtonEasy.setSelected(true);
+                radioButtonHard.setSelected(false);
             }
         });
 
