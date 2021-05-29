@@ -135,7 +135,7 @@ public class GameBoardController implements Initializable {
                 if (xPos[x][y] == 0){
                     xPos[x][y] = -1;
                     xPosTemp[x][y] = -1;
-                    int rate = miniMax(diffLVL,false, xPosTemp);
+                    int rate = miniMax(diffLVL,false, xPosTemp,0);
                     xPos[x][y] = 0;
                     xPosTemp[x][y] = 0;
                     if (previousRate < rate){
@@ -182,7 +182,7 @@ public class GameBoardController implements Initializable {
         return 0;
     }
 
-    public int miniMax(int difficultyLvL,boolean AI, Integer[][] posTable){
+    public int miniMax(int difficultyLvL,boolean AI, Integer[][] posTable, int movesToBeDone){
         int winnerCheck = winningCheck(posTable,AI);
         if (winnerCheck != 0) return winnerCheck;
 
@@ -192,7 +192,8 @@ public class GameBoardController implements Initializable {
                 for (int y = 0; y < 3; y++) {
                     if (posTable[x][y] == 0){
                         posTable[x][y] = -1;
-                        int rate = miniMax(difficultyLvL,false,posTable);
+                        int rate = miniMax(difficultyLvL,false,posTable, movesToBeDone + 1);
+                        rate = rate - movesToBeDone;
                         posTable[x][y] = 0;
                         if (difficultyLvL == 2) { if (rate > bestRate) bestRate = rate; } else {if (rate < bestRate) bestRate = rate;}
                     }
@@ -205,10 +206,10 @@ public class GameBoardController implements Initializable {
                 for (int y = 0; y < 3; y++) {
                     if (posTable[x][y] == 0){
                         posTable[x][y] = 1;
-                        int rate = miniMax(difficultyLvL,true,posTable);
+                        int rate = miniMax(difficultyLvL,true,posTable, movesToBeDone + 1);
                         posTable[x][y] = 0;
+                        rate = rate + movesToBeDone;
                         if (difficultyLvL == 2) { if (rate < bestRate) bestRate = rate; } else {if (rate > bestRate) bestRate = rate;}
-                        //if (rate < bestRate) bestRate = rate;
                     }
                 }
             }
