@@ -1,5 +1,5 @@
 # AI Tic Tac Toe
-> Different version of well known game implemented with AI
+> Different version of well known game implemented with AI.
 
 ## Table of contents
 * [General info](#general-info)
