@@ -45,7 +45,7 @@ Show examples of usage:
                 }
             }
             return bestRate;
-        }else {//symulacja gracza
+        }else {//player simulation
             int bestRate = Integer.MAX_VALUE;
             for (int x = 0; x < 3; x++) {
                 for (int y = 0; y < 3; y++) {
