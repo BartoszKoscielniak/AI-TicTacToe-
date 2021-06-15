@@ -13,7 +13,7 @@
 
 ## General info
 >It is different version of Tic Tac Toe game where game ends when player put third X in a row.
-> The game have 2 difficulty level and was implemented with MiniMax alghoritm
+> The game have 2 difficulty level and was implemented with MiniMax alghoritm.
 
 ## Screenshots
 
@@ -68,6 +68,7 @@ Show examples of usage:
 
 * Java 16
 * JavaFX
+* Gradle
 
 ## Status
 Project is: _finished_ :monocle_face:
